@@ -22,6 +22,5 @@ Frontend:
 - Host dashboard (create/edit listings)
 
 *** ROUGH ***
-
 Businesses like Bar, Club and Pubs
 Recreational Parks, Schools, Shopping Mall, Parking Garage

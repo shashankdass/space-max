@@ -246,3 +246,6 @@ yarn-error.log*
 
 .cursor/
 environments/
+web-bundles/
+.bmad-core/
+space_rental.db
