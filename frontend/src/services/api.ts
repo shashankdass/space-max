@@ -48,6 +48,29 @@ export interface SpaceQueryParams {
   search?: string;
 }
 
+export interface SpaceCreateData {
+  title: string;
+  description: string;
+  space_type: string;
+  location: string;
+  address: string;
+  city: string;
+  state: string;
+  zip_code: string;
+  country: string;
+  price_per_hour?: number;
+  price_per_day?: number;
+  price_per_week?: number;
+  price_per_month?: number;
+  area_sqft?: number;
+  max_capacity?: number;
+  amenities: string[];
+  is_available: boolean;
+  available_from?: string;
+  available_until?: string;
+  photos: string[];
+}
+
 export const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -63,6 +86,11 @@ export const spaceService = {
 
   async getSpace(id: number): Promise<Space> {
     const response = await api.get(`/spaces/${id}`);
+    return response.data;
+  },
+
+  async createSpace(spaceData: SpaceCreateData): Promise<Space> {
+    const response = await api.post('/spaces', spaceData);
     return response.data;
   },
 };

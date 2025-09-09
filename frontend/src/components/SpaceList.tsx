@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
 import SpaceCard from './SpaceCard';
+import SpaceForm from './SpaceForm';
 import { spaceService, type Space, type SpaceQueryParams } from '../services/api';
 
 const SpaceList: React.FC = () => {
@@ -14,6 +15,7 @@ const SpaceList: React.FC = () => {
   });
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
 
   const spaceTypes = [
@@ -67,6 +69,10 @@ const SpaceList: React.FC = () => {
     setFilters(prev => ({ ...prev, page }));
   };
 
+  const handleSpaceCreated = () => {
+    fetchSpaces(); // Refresh the list after creating a new space
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen">
@@ -97,18 +103,38 @@ const SpaceList: React.FC = () => {
     );
   }
 
+  if (showCreateForm) {
+    return (
+      <SpaceForm
+        onClose={() => setShowCreateForm(false)}
+        onSpaceCreated={handleSpaceCreated}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="header">
-          <h1 className="header-title">
-            Discover Amazing Spaces
-          </h1>
-          <p className="header-description">
-            Find the perfect space for your needs - from garages to backyards, 
-            we have everything you're looking for.
-          </p>
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <h1 className="header-title">
+                Discover Amazing Spaces
+              </h1>
+              <p className="header-description">
+                Find the perfect space for your needs - from garages to backyards, 
+                we have everything you're looking for.
+              </p>
+            </div>
+            <button
+              onClick={() => setShowCreateForm(true)}
+              className="btn-circle"
+              title="Create Space"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Search and Filters */}
@@ -234,6 +260,7 @@ const SpaceList: React.FC = () => {
             </button>
           </div>
         )}
+
       </div>
     </div>
   );
