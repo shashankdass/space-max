@@ -73,6 +73,10 @@ const SpaceList: React.FC = () => {
     fetchSpaces(); // Refresh the list after creating a new space
   };
 
+  const handleCreateSpace = () => {
+    setShowCreateForm(true);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen">
@@ -128,7 +132,7 @@ const SpaceList: React.FC = () => {
               </p>
             </div>
             <button
-              onClick={() => setShowCreateForm(true)}
+              onClick={handleCreateSpace}
               className="btn-circle"
               title="Create Space"
             >

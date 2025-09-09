@@ -168,7 +168,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-lg max-w-4xl mx-auto">
           {/* Header */}
@@ -176,9 +176,10 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
             <h2 className="text-2xl font-bold text-gray-900">Create New Space</h2>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="btn-circle"
+              title="Close"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
@@ -200,11 +201,10 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
               </label>
               <input
                 type="text"
-                name="title"
+                id="title"
                 value={formData.title}
-                onChange={handleInputChange}
-                required
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                   fieldErrors.title ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Enter space title"
@@ -219,15 +219,14 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 Description *
               </label>
               <textarea
-                name="description"
+                id="description"
                 value={formData.description}
-                onChange={handleInputChange}
-                required
-                rows={3}
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                rows={4}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none transition-all ${
                   fieldErrors.description ? 'border-red-500' : 'border-gray-300'
                 }`}
-                placeholder="Describe your space"
+                placeholder="Describe your space in detail"
               />
               {fieldErrors.description && (
                 <p className="mt-1 text-sm font-medium" style={{ color: '#dc2626' }}>{fieldErrors.description}</p>
@@ -240,20 +239,19 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   Space Type *
                 </label>
                 <select
-                  name="space_type"
-                  value={formData.space_type}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
-                    fieldErrors.space_type ? 'border-red-500' : 'border-gray-300'
-                  }`}
-                >
+                id="space_type"
+                value={formData.space_type}
+                onChange={(e) => setFormData({ ...formData, space_type: e.target.value })}
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
+                  fieldErrors.space_type ? 'border-red-500' : 'border-gray-300'
+                }`}
+              >
                   {spaceTypes.map(type => (
                     <option key={type} value={type}>
                       {type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                     </option>
                   ))}
-                </select>
+              </select>
                 {fieldErrors.space_type && (
                   <p className="mt-1 text-sm font-medium" style={{ color: '#dc2626' }}>{fieldErrors.space_type}</p>
                 )}
@@ -269,7 +267,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   value={formData.location}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.location ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="e.g., Downtown District"
@@ -295,7 +293,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 value={formData.address}
                 onChange={handleInputChange}
                 required
-                className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                   fieldErrors.address ? 'border-red-500' : 'border-gray-300'
                 }`}
                 placeholder="Street address"
@@ -316,7 +314,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   value={formData.city}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.city ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="City"
@@ -336,7 +334,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   value={formData.state}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.state ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="State"
@@ -356,7 +354,7 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   value={formData.zip_code}
                   onChange={handleInputChange}
                   required
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.zip_code ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="ZIP Code"
@@ -380,11 +378,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="price_per_hour"
-                  value={formData.price_per_hour}
+                  value={formData.price_per_hour || ''}
                   onChange={handleInputChange}
                   min="0"
                   step="0.01"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.price_per_hour ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="0.00"
@@ -401,11 +399,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="price_per_day"
-                  value={formData.price_per_day}
+                  value={formData.price_per_day || ''}
                   onChange={handleInputChange}
                   min="0"
                   step="0.01"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.price_per_day ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="0.00"
@@ -422,11 +420,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="price_per_week"
-                  value={formData.price_per_week}
+                  value={formData.price_per_week || ''}
                   onChange={handleInputChange}
                   min="0"
                   step="0.01"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.price_per_week ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="0.00"
@@ -443,11 +441,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="price_per_month"
-                  value={formData.price_per_month}
+                  value={formData.price_per_month || ''}
                   onChange={handleInputChange}
                   min="0"
                   step="0.01"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.price_per_month ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="0.00"
@@ -471,10 +469,10 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="area_sqft"
-                  value={formData.area_sqft}
+                  value={formData.area_sqft || ''}
                   onChange={handleInputChange}
                   min="0"
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.area_sqft ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Optional"
@@ -491,10 +489,12 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                 <input
                   type="number"
                   name="max_capacity"
-                  value={formData.max_capacity}
+                  value={formData.max_capacity || ''}
                   onChange={handleInputChange}
                   min="1"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
+                    fieldErrors.max_capacity ? 'border-red-500' : 'border-gray-300'
+                  }`}
                 />
               </div>
             </div>
@@ -558,11 +558,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   Available From
                 </label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   name="available_from"
                   value={formData.available_from}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.available_from ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -576,11 +576,11 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
                   Available Until
                 </label>
                 <input
-                  type="date"
+                  type="datetime-local"
                   name="available_until"
                   value={formData.available_until}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all ${
                     fieldErrors.available_until ? 'border-red-500' : 'border-gray-300'
                   }`}
                 />
@@ -593,20 +593,20 @@ const SpaceForm: React.FC<SpaceFormProps> = ({ onClose, onSpaceCreated }) => {
 
           {/* Submit Buttons */}
           <div className="flex justify-end gap-4 pt-6 border-t border-gray-200">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={loading}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              {loading ? 'Creating...' : 'Create Space'}
-            </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full bg-gray-200 text-gray-800 py-3 px-4 rounded-full font-medium hover:bg-gray-300 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary w-full py-3 px-4 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? 'Creating Space...' : 'Create Space'}
+                </button>
           </div>
           </form>
         </div>
